@@ -1,9 +1,9 @@
 /*
-    pa3.js
+    termProject.js
 
-    ISP Assignment 3 || Web Page Generator || 10/25/22
+    <!-- ISP Term Project || Web Page Generator 2.0 || November 2022 -->
 
-    functions manipulating the generated window of pa3.html
+    functions manipulating the generated window of termProject.html
 */
 
 // page is a string that is incrementally appended to as the user gives commands. 

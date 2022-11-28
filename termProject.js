@@ -82,15 +82,9 @@ let addTextCount = 0;
 // including any content that has been appended to it since the user last peeked
 function peek() 
 {
-    // if an old window is still open, close it 
-    if(myWindow != null)
-    {
-        myWindow.close();
-    } 
-
     // open the new window with the specified width and height
     // (URL, name, specs)
-    myWindow = window.open("", "ISP-PA3-CHILD", "width=800,height=300");
+    myWindow = window.open("", "designWindow");
 
     /* Piece-by-piece, the window renders an entire HTML document, which contains any user-updated page contents */
     myWindow.document.write("<!DOCTYPE html><html><head><style>");
@@ -119,6 +113,7 @@ function peek()
     myWindow.document.write("</style></head><body>");
     myWindow.document.write(page);                          
     myWindow.document.write("</body></html>"); 
+    myWindow.close();
 }
 
 // addHeading() prompts for heading input and a heading size.

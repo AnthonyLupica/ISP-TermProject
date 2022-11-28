@@ -8,6 +8,7 @@
 
     <!-- Include files -->
     <script src="termProject.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
     <!-- CSS DEFINED BELOW -->
     <style>
@@ -130,7 +131,7 @@
     </style>
 </head>
 
-<body onload="peek()">
+<body onload="update()">
     <!-- Page header -->
     <h1 style="text-align : center; color : white"> Anthony Lupica's Web Page Generator 2.0 </h1>'
     
@@ -143,12 +144,6 @@
                 <th> Item </th>
                 <th> Description </th>
                 <th> Action </th>
-            </tr>
-            
-            <tr>
-                <td> Peek </td>
-                <td> Peek into the design window </td>
-                <td><button onclick="peek()"> peek </button></td>
             </tr>
             
             <tr>
@@ -226,7 +221,7 @@
         <div id="windowWrap">
             <table style="margin : auto"><caption>OUTPUT</caption></table>
             <div id="window">
-                <iframe name="designWindow" title="design window"></iframe>
+                <iframe id="designWindow" name="designWindow" title="design window"></iframe>
             </div> 
         <div>
     </div>

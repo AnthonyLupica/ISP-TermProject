@@ -1,16 +1,16 @@
 /*
     termProject.js
 
-    <!-- ISP Term Project || Web Page Generator 2.0 || November 2022 -->
+    <!-- ISP Term Project || Web content Generator 2.0 || November 2022 -->
 
     functions manipulating the generated window of termProject.html
 */
 
-// page is a string that is incrementally appended to as the user gives commands. 
+// content is a string that is incrementally appended to as the user gives commands. 
 // myWindow is an indentifier for a new window. 
-// On each peek(), it is displayed up-to-date with the current content of the page
-var page = "";
-var myWindow = null;
+// On each update(), it is displayed up-to-date with the current content of the content
+var content = "";
+myWindow = null;
 
 /* Global constants that restrict the number of each type of element that the user can create */
 const MAX_HEADINGS = 6;
@@ -78,15 +78,19 @@ let p4Font  = "default";
 let addHeadingCount = 0;
 let addTextCount = 0;
 
-// peek() overwrites the window, rendering all the content of the page, 
-// including any content that has been appended to it since the user last peeked
-function peek() 
+// update() overwrites the window, rendering all the content of the page, 
+// including any content that has been appended to it since it was last updated
+function update() 
 {
+    // dump the contents of the iframe before updating
+    var myFrame = $("#designWindow").contents().find('body');
+    myFrame.html("");
+    
     // open the new window with the specified width and height
     // (URL, name, specs)
     myWindow = window.open("", "designWindow");
-
-    /* Piece-by-piece, the window renders an entire HTML document, which contains any user-updated page contents */
+    
+    /* Piece-by-piece, the window renders an entire HTML document, which contains any user-updated contents */
     myWindow.document.write("<!DOCTYPE html><html><head><style>");
     myWindow.document.write // Individual CSS blocks are defined line-by-line below
     ( 
@@ -111,14 +115,13 @@ function peek()
         "sub { font-size : 50%; color : black; font-family : default; }"                          
     );
     myWindow.document.write("</style></head><body>");
-    myWindow.document.write(page);                          
+    myWindow.document.write(content);                          
     myWindow.document.write("</body></html>"); 
-    myWindow.close();
 }
 
 // addHeading() prompts for heading input and a heading size.
 // A unique ID is derived using the call counter.
-// Page is appended with the new header.
+// content is appended with the new header.
 function addHeading()
 {
     // Has the user already reached the max number of headings?
@@ -183,13 +186,13 @@ function addHeading()
     // string to be appended is "<hX id='ID'> headingEntry <sub>ID</sub></hX>" 
     const stringToAppend = "<h" + X + " id='" + ID + "'> " + headingEntry + " <sub>" + ID + "</sub>" + "</h" + X + "> ";
     
-    // append to the page
-    page += stringToAppend;
+    // append to the content
+    content += stringToAppend;
     
     /* LOGGING */
     
     // log the appended string
-    console.log("Page appended with: " + stringToAppend);
+    console.log("content appended with: " + stringToAppend);
 
     // log an updated list of all identified elements
     let idList = "";
@@ -198,11 +201,13 @@ function addHeading()
         idList += x + ", ";
     }
     console.log("List of identified elements: " + idList);
+
+    update();
 }
 
 // addText() prompts for paragraph input.
 // A unique ID is derived using the call counter.
-// Page is appended with the new paragraph.
+// content is appended with the new paragraph.
 function addText()
 {
     // Has the user already reached the max number of paragraphs?
@@ -246,13 +251,13 @@ function addText()
     // string to be appended is "<p id='ID'> textEntry <sub>ID</sub></p>" 
     const stringToAppend = "<p id='" + ID + "'> " + textEntry + " <sub>" + ID + "</sub>" + "</p> ";
     
-    // append to the page
-    page += stringToAppend;
+    // append to the content
+    content += stringToAppend;
     
     /* LOGGING */
     
     // log the appended string
-    console.log("Page appended with: " + stringToAppend);
+    console.log("content appended with: " + stringToAppend);
 
     // log an updated list of all identified elements
     let idList = "";
@@ -547,11 +552,11 @@ function fontSize()
 }
 
 //@TODO before submission, make sure this function is up to date
-// reset() is responsible for returning all non-const global variables back to the state they had on page load
+// reset() is responsible for returning all non-const global variables back to the state they had on content load
 function reset() 
 {
-    // wipeout the page
-    page = "";
+    // wipeout the content
+    content = "";
     
     // clear the id set
     assignedID.clear();

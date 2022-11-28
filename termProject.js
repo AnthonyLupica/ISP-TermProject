@@ -85,18 +85,17 @@ function update()
     // dump the contents of the iframe before updating
     var myFrame = $("#designWindow").contents().find('body');
     myFrame.html("");
+
+    // CSS for the background color
+    document.getElementById("designWindow").style.backgroundColor = document.getElementById("bg-color").value;
     
-    // open the new window with the specified width and height
-    // (URL, name, specs)
+    // open the window in the iframe to write the updated page
     myWindow = window.open("", "designWindow");
     
     /* Piece-by-piece, the window renders an entire HTML document, which contains any user-updated contents */
     myWindow.document.write("<!DOCTYPE html><html><head><style>");
     myWindow.document.write // Individual CSS blocks are defined line-by-line below
     ( 
-        // CSS for the background color
-        "body { background-color : " + document.getElementById("bg-color").value + "; }" +
-        
         // CSS for headings
         "#h1 { color : " + h1Color + "; text-align : " + h1Align + "; font-size : " + h1Size + "; font-family : " + h1Font + "; }" +
         "#h2 { color : " + h2Color + "; text-align : " + h2Align + "; font-size : " + h2Size + "; font-family : " + h2Font + "; }" +
@@ -266,6 +265,8 @@ function addText()
         idList += x + ", ";
     }
     console.log("List of identified elements: " + idList);
+
+    update();
 }
 
 function textColor() 
@@ -330,6 +331,8 @@ function textColor()
             p4Color = newColor;
             break;
     }
+
+    update();
 }
 
 function textAlign()
@@ -397,6 +400,8 @@ function textAlign()
 
     // reset select form to default option
     document.getElementById("align").value = document.getElementById("default1").value;
+
+    update();
 }
 
 function fontFamily()
@@ -464,6 +469,8 @@ function fontFamily()
 
     // reset select form to default option
     document.getElementById("font").value = document.getElementById("default2").value;
+
+    update();
 }
 
 function fontSize()
@@ -549,6 +556,8 @@ function fontSize()
     // reset input text field for text size to the default placeholder text
     document.getElementById('font-size').value = null;
     document.getElementById('font-size').placeholder = " px(1 - 50)";
+
+    update();
 }
 
 //@TODO before submission, make sure this function is up to date
@@ -619,6 +628,8 @@ function reset()
     // reset color pickers to white
     document.getElementById("bg-color").value = "#FFFFFF"
     document.getElementById("text-color").value = "#FFFFFF"
+
+    update();
 }
 
 // close() closes the design window

@@ -10,7 +10,8 @@
 // myWindow is an indentifier for a new window. 
 // On each update(), it is displayed up-to-date with the current content of the content
 var content = "";
-myWindow = null;
+var myWindow = null;
+var win = null;
 
 /* Global constants that restrict the number of each type of element that the user can create */
 const MAX_HEADINGS = 6;
@@ -24,55 +25,55 @@ let assignedID = new Set();
     needed for the user to change style properties after the content has already been entered. 
     Initialized to default values here, but can be modified by the user. They are returned to default by calling reset() 
 */
-let h1Color = "black";
-let h1Align = "center";
-let h1Size  = "default";
-let h1Font  = "default";
+var h1Color = "black";
+var h1Align = "center";
+var h1Size  = "default";
+var h1Font  = "default";
 
-let h2Color = "black";
-let h2Align = "center";
-let h2Size  = "default";
-let h2Font  = "default";
+var h2Color = "black";
+var h2Align = "center";
+var h2Size  = "default";
+var h2Font  = "default";
 
-let h3Color = "black";
-let h3Align = "center";
-let h3Size  = "default";
-let h3Font  = "default";
+var h3Color = "black";
+var h3Align = "center";
+var h3Size  = "default";
+var h3Font  = "default";
 
-let h4Color = "black";
-let h4Align = "center";
-let h4Size  = "default";
-let h4Font  = "default";
+var h4Color = "black";
+var h4Align = "center";
+var h4Size  = "default";
+var h4Font  = "default";
 
-let h5Color = "black";
-let h5Align = "center";
-let h5Size  = "default";
-let h5Font  = "default";
+var h5Color = "black";
+var h5Align = "center";
+var h5Size  = "default";
+var h5Font  = "default";
 
-let h6Color = "black";
-let h6Align = "center";
-let h6Size  = "default";
-let h6Font  = "default";
+var h6Color = "black";
+var h6Align = "center";
+var h6Size  = "default";
+var h6Font  = "default";
 
-let p1Color = "black";
-let p1Align = "left";
-let p1Size  = "default";
-let p1Font  = "default";
+var p1Color = "black";
+var p1Align = "left";
+var p1Size  = "default";
+var p1Font  = "default";
 
-let p2Color = "black";
-let p2Align = "left";
-let p2Size  = "default";
-let p2Font  = "default";
+var p2Color = "black";
+var p2Align = "left";
+var p2Size  = "default";
+var p2Font  = "default";
 
-let p3Color = "black";
-let p3Align = "left";
-let p3Size  = "default";
-let p3Font  = "default";
+var p3Color = "black";
+var p3Align = "left";
+var p3Size  = "default";
+var p3Font  = "default";
 
-let p4Color = "black";
-let p4Align = "left";
-let p4Size  = "default";
-let p4Font  = "default";
+var p4Color = "black";
+var p4Align = "left";
+var p4Size  = "default";
+var p4Font  = "default";
 
 /* Function call-counter variables used to assign a unique id to each new element */
 let addHeadingCount = 0;
@@ -116,6 +117,125 @@ function update()
     myWindow.document.write("</style></head><body>");
     myWindow.document.write(content);                          
     myWindow.document.write("</body></html>"); 
+}
+
+// called on each update. The html code is stored in unrendered form and output to a new window
+function unrendered()
+{
+    //  open a new window
+    if (win != null) 
+    {
+        win.close();
+    }
+    win = window.open("", "rawHTML", "width=1024,height=768");             
+    
+    // CSS for headings
+    var frameHeader = "\t\t\t\t\t\t#h1 \n\t\t\t\t\t\t { \n\t\t\t\t\t\t\t\t\t color : " + h1Color + "; \n\t\t\t\t\t\t\t\t\t text-align : " + h1Align + "; \n\t\t\t\t\t\t\t\t\t font-size : " + h1Size + "; \n\t\t\t\t\t\t\t\t\t font-family : " + h1Font + "; \n\t\t\t\t\t\t } \n\n"; 
+    frameHeader = frameHeader.concat("\t\t\t\t\t\t#h2 \n\t\t\t\t\t\t { \n\t\t\t\t\t\t\t\t\t color : " + h2Color + "; \n\t\t\t\t\t\t\t\t\t text-align : " + h2Align + "; \n\t\t\t\t\t\t\t\t\t font-size : " + h2Size + "; \n\t\t\t\t\t\t\t\t\t font-family : " + h2Font + "; \n\t\t\t\t\t\t } \n\n");
+    frameHeader = frameHeader.concat("\t\t\t\t\t\t#h3 \n\t\t\t\t\t\t { \n\t\t\t\t\t\t\t\t\t color : " + h3Color + "; \n\t\t\t\t\t\t\t\t\t text-align : " + h3Align + "; \n\t\t\t\t\t\t\t\t\t font-size : " + h3Size + "; \n\t\t\t\t\t\t\t\t\t font-family : " + h3Font + "; \n\t\t\t\t\t\t } \n\n");
+    frameHeader = frameHeader.concat("\t\t\t\t\t\t#h4 \n\t\t\t\t\t\t { \n\t\t\t\t\t\t\t\t\t color : " + h4Color + "; \n\t\t\t\t\t\t\t\t\t text-align : " + h4Align + "; \n\t\t\t\t\t\t\t\t\t font-size : " + h4Size + "; \n\t\t\t\t\t\t\t\t\t font-family : " + h4Font + "; \n\t\t\t\t\t\t } \n\n");
+    frameHeader = frameHeader.concat("\t\t\t\t\t\t#h5 \n\t\t\t\t\t\t { \n\t\t\t\t\t\t\t\t\t color : " + h5Color + "; \n\t\t\t\t\t\t\t\t\t text-align : " + h5Align + "; \n\t\t\t\t\t\t\t\t\t font-size : " + h5Size + "; \n\t\t\t\t\t\t\t\t\t font-family : " + h5Font + "; \n\t\t\t\t\t\t } \n\n");
+    frameHeader = frameHeader.concat("\t\t\t\t\t\t#h6 \n\t\t\t\t\t\t { \n\t\t\t\t\t\t\t\t\t color : " + h6Color + "; \n\t\t\t\t\t\t\t\t\t text-align : " + h6Align + "; \n\t\t\t\t\t\t\t\t\t font-size : " + h6Size + "; \n\t\t\t\t\t\t\t\t\t font-family : " + h6Font + "; \n\t\t\t\t\t\t } \n\n");
+    
+    // CSS for paragraphs
+    var frameParagraph = "\t\t\t\t\t\t#p1 \n\t\t\t\t\t\t { \n\t\t\t\t\t\t\t\t\t color : " + p1Color + "; \n\t\t\t\t\t\t\t\t\t text-align : " + p1Align + "; \n\t\t\t\t\t\t\t\t\t font-size : " + p1Size + "; \n\t\t\t\t\t\t\t\t\t font-family : " + p1Font + "; \n\t\t\t\t\t\t } \n\n\t\t\t\t\t\t"; 
+    frameParagraph = frameParagraph.concat("#p2 \n\t\t\t\t\t\t { \n\t\t\t\t\t\t\t\t\t color : " + p2Color + "; \n\t\t\t\t\t\t\t\t\t text-align : " + p2Align + "; \n\t\t\t\t\t\t\t\t\t font-size : " + p2Size + "; \n\t\t\t\t\t\t\t\t\t font-family : " + p2Font + "; \n\t\t\t\t\t\t } \n\n\t\t\t\t\t\t");
+    frameParagraph = frameParagraph.concat("#p3 \n\t\t\t\t\t\t { \n\t\t\t\t\t\t\t\t\t color : " + p3Color + "; \n\t\t\t\t\t\t\t\t\t text-align : " + p3Align + "; \n\t\t\t\t\t\t\t\t\t font-size : " + p3Size + "; \n\t\t\t\t\t\t\t\t\t font-family : " + p3Font + "; \n\t\t\t\t\t\t } \n\n\t\t\t\t\t\t");
+    frameParagraph = frameParagraph.concat("#p4 \n\t\t\t\t\t\t { \n\t\t\t\t\t\t\t\t\t color : " + p4Color + "; \n\t\t\t\t\t\t\t\t\t text-align : " + p4Align + "; \n\t\t\t\t\t\t\t\t\t font-size : " + p4Size + "; \n\t\t\t\t\t\t\t\t\t font-family : " + p4Font + "; \n\t\t\t\t\t\t } \n\n\t\t\t\t\t\t");
+        
+    // CSS for misc. items
+    var frameMisc = "sub \n\t\t\t\t\t\t { \n\t\t\t\t\t\t\t\t\t font-size : 50%; \n\t\t\t\t\t\t\t\t\t color : black; \n\t\t\t\t\t\t\t\t\t font-family : default; \n\t\t\t\t\t\t } \n\n";   
+                       
+    frameHeader = frameHeader.replace(/[<>&\n\t]/g, function(markup) 
+    {
+        // replace all occurances of the following characters with...
+        return {
+            '<': '&lt;',
+            '>': '&gt;',
+            '&': '&amp;',
+           '\n': '<br>',
+           '\t' : '&nbsp'
+        }[markup];
+    });
+
+    frameParagraph = frameParagraph.replace(/[<>&\n\t]/g, function(markup) 
+    {
+        // replace all occurances of the following characters with...
+        return {
+            '<': '&lt;',
+            '>': '&gt;',
+            '&': '&amp;',
+           '\n': '<br>',
+           '\t' : '&nbsp'
+        }[markup];
+    });
+
+    frameMisc = frameMisc.replace(/[<>&\n\t]/g, function(markup) 
+    {
+        // replace all occurances of the following characters with...
+        return {
+            '<': '&lt;',
+            '>': '&gt;',
+            '&': '&amp;',
+           '\n': '<br>',
+           '\t' : '&nbsp'
+        }[markup];
+    });
+
+    var frameBody = content;
+    frameBody = frameBody.replace(/[<>&\n\t]/g, function(markup) 
+    {
+        // replace all occurances of the following characters with...
+        return {
+            '<': '&lt;',
+            '>': '&gt;',
+            '&': '&amp;',
+           '\n': '<br>',
+           '\t' : '&nbsp'
+        }[markup];
+    });
+
+    var docHeader = "<!DOCTYPE html>\n<html>\n<head>\n\t\t\t<style>\n";
+    docHeader = docHeader.replace(/[<>&\n\t]/g, function(markup) 
+    {
+        // replace all occurances of the following characters with...
+        return {
+            '<': '&lt;',
+            '>': '&gt;',
+            '&': '&amp;',
+           '\n': '<br>',
+           '\t' : '&nbsp'
+        }[markup];
+    });
+
+    var midOuterHTML = "\t\t\t</style>\n</head>\n<body>\n\n";
+    midOuterHTML = midOuterHTML.replace(/[<>&\n\t]/g, function(markup) 
+    {
+        // replace all occurances of the following characters with...
+        return {
+            '<': '&lt;',
+            '>': '&gt;',
+            '&': '&amp;',
+           '\n': '<br>',
+           '\t' : '&nbsp'
+        }[markup];
+    });
+
+    var docFooter = "</body>\n</html>";
+    docFooter = docFooter.replace(/[<>&\n\t]/g, function(markup) 
+    {
+        // replace all occurances of the following characters with...
+        return {
+            '<': '&lt;',
+            '>': '&gt;',
+            '&': '&amp;',
+           '\n': '<br>',
+           '\t' : '&nbsp'
+        }[markup];
+    });
+
+    win.document.write("");
+    win.document.write(docHeader + frameHeader + frameParagraph + frameMisc + midOuterHTML + frameBody + docFooter);
 }
 
 // addHeading() prompts for heading input and a heading size.
@@ -183,7 +303,7 @@ function addHeading()
     assignedID.add(ID);
 
     // string to be appended is "<hX id='ID'> headingEntry <sub>ID</sub></hX>" 
-    const stringToAppend = "<h" + X + " id='" + ID + "'> " + headingEntry + " <sub>" + ID + "</sub>" + "</h" + X + "> ";
+    const stringToAppend = "\t\t\t<h" + X + " id='" + ID + "'> \n\t\t\t\t\t\t" + headingEntry + "<sub>" + ID + "</sub> \n" + "\t\t\t</h" + X + "> \n\n";
     
     // append to the content
     content += stringToAppend;
@@ -248,7 +368,7 @@ function addText()
     assignedID.add(ID);
 
     // string to be appended is "<p id='ID'> textEntry <sub>ID</sub></p>" 
-    const stringToAppend = "<p id='" + ID + "'> " + textEntry + " <sub>" + ID + "</sub>" + "</p> ";
+    const stringToAppend = "\t\t\t<p id='" + ID + "'> \n\t\t\t\t\t\t" + textEntry + " <sub>" + ID + "</sub> \n" + "\t\t\t</p> \n\n";
     
     // append to the content
     content += stringToAppend;
@@ -632,8 +752,18 @@ function reset()
     update();
 }
 
-// close() closes the design window
-function close() 
+// exit() closes the design window
+function exit() 
 {
-    myWindow.close();
+    let displayState = document.getElementById("window");
+
+    if (displayState.style.display == "none")
+    {
+        displayState.style.display = "block";
+    }
+
+    else
+    {
+        displayState.style.display = "none";
+    }  
 }

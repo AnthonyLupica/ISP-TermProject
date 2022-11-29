@@ -209,11 +209,17 @@
                 <td> Reset the design window, and return all styles to default settings </td>
                 <td><button onclick="reset()"> reset </button></td>
             </tr>
-            
+
+            <tr>
+                <td> See raw HTML </td>
+                <td> In a new window, view the raw contents of the page </td>
+                <td><button onclick="unrendered()"> raw </button></td>
+            </tr>
+
             <tr>
                 <td> Close </td>
                 <td> Close the design window </td>
-                <td><button onclick="close()"> close </button></td>
+                <td><button onclick="exit()"> close </button></td>
             </tr>
         </table>
 
@@ -225,5 +231,6 @@
             </div> 
         <div>
     </div>
+    <pre id="test" style="color : white"></pre>
 </body>
 </html>

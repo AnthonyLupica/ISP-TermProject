@@ -221,7 +221,7 @@ function unrendered()
         }[markup];
     });
 
-    var docFooter = "</body>\n</html>";
+    var docFooter = "</body>\n</html>>";
     docFooter = docFooter.replace(/[<>&\n\t]/g, function(markup) 
     {
         // replace all occurances of the following characters with...
